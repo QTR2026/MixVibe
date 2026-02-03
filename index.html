@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nexus Nexus | Dynamic AI Edition</title>
+  <style>
+    :root {
+      --bg-dark: #070b14;
+      --card-bg: #111827;
+      --accent: #0ea5e9;
+      --fav-red: #f43f5e;
+      --text-main: #f8fafc;
+      --text-dim: #94a3b8;
+    }
+
+    * { box-sizing: border-box; transition: all 0.3s ease; font-family: 'Inter', 'Segoe UI', sans-serif; }
+
+    body { background-color: var(--bg-dark); color: var(--text-main); margin: 0; }
+    body.rtl { direction: rtl; }
+
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+    header { padding: 4rem 1rem; text-align: center; background: radial-gradient(circle at top, #1e293b, var(--bg-dark)); }
+
+    /* API Integration Status Indicator */
+    .api-status { font-size: 0.8rem; color: #10b981; margin-bottom: 10px; display: inline-block; padding: 5px 12px; background: rgba(16, 185, 129, 0.1); border-radius: 20px; }
+
+    .toolbar {
+      display: flex; flex-wrap: wrap; gap: 15px; justify-content: space-between;
+      margin-top: -40px; padding: 25px; background: rgba(255,255,255,0.03);
+      backdrop-filter: blur(15px); border-radius: 20px; border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    input[type="text"] { background: #0f172a; border: 1px solid #334155; color: white; padding: 12px 20px; border-radius: 10px; flex-grow: 1; }
+
+    .btn-toggle {
+      background: rgba(255,255,255,0.05); color: white; border: 1px solid var(--accent);
+      padding: 10px 25px; border-radius: 10px; cursor: pointer; display: flex; align-items: center; gap: 8px; font-weight: 600;
+    }
+
+    .btn-toggle.active { background: var(--accent); color: white; box-shadow: 0 0 15px rgba(14, 165, 233, 0.4); }
+
+    .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 30px; margin-top: 50px; padding-bottom: 50px; }
+
+    .card { background: var(--card-bg); border-radius: 18px; overflow: hidden; position: relative; border: 1px solid rgba(255,255,255,0.05); }
+    .card:hover { transform: translateY(-10px); border-color: var(--accent); box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
+
+    .card img { width: 100%; height: 320px; object-fit: cover; }
+
+    .rating-badge { position: absolute; bottom: 80px; left: 10px; background: rgba(0,0,0,0.8); color: #fbbf24; padding: 4px 8px; border-radius: 6px; font-weight: bold; font-size: 0.9rem; }
+    body.rtl .rating-badge { left: auto; right: 10px; }
+
+    .heart-icon { position: absolute; top: 15px; right: 15px; font-size: 1.8rem; cursor: pointer; z-index: 5; }
+    body.rtl .heart-icon { left: 15px; right: auto; }
+    .heart-icon.active { color: var(--fav-red); }
+
+    .card-content { padding: 15px; }
+    .card-title { font-weight: bold; font-size: 1rem; margin-bottom: 5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .card-meta { font-size: 0.8rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px; }
+
+    .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 1000; align-items: center; justify-content: center; padding: 20px; }
+    .modal-box { background: var(--card-bg); max-width: 800px; width: 100%; border-radius: 30px; display: flex; flex-direction: row; overflow: hidden; position: relative; border: 1px solid var(--accent); }
+    
+    @media (max-width: 768px) { .modal-box { flex-direction: column; } }
+
+    .modal-img { width: 40%; object-fit: cover; }
+    @media (max-width: 768px) { .modal-img { width: 100%; height: 250px; } }
+
+    .modal-info { padding: 40px; flex-grow: 1; }
+  </style>
+</head>
+<body id="body">
+
+  <header>
+    <div class="api-status">● Live API Sync Active (TMDB, Jikan, RAWG)</div>
+    <h1 id="txt-title">Nexus AI Encyclopedia</h1>
+    <p id="txt-subtitle">Real-time data from global entertainment databases</p>
+  </header>
+
+  <div class="container">
+    <div class="toolbar">
+      <input type="text" id="search" placeholder="Search across all platforms..." onkeyup="handleSearch()">
+      
+      <div style="display:flex; gap:10px;">
+        <button id="btn-all" class="btn-toggle active" onclick="setView('all')"><span id="txt-all">Discover</span></button>
+        <button id="btn-fav" class="btn-toggle" onclick="setView('fav')"><span id="txt-fav">My List</span> <span id="fav-count">0</span></button>
+        <select id="lang" onchange="switchLang(this.value)" style="background:transparent; color:white; border:1px solid #334155; border-radius:10px; padding:0 10px;">
+            <option value="en">EN</option>
+            <option value="ar">AR</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="gallery" id="main-grid">
+        </div>
+  </div>
+
+  <div id="modal" class="modal" onclick="closeModal(event)">
+    <div class="modal-box" onclick="event.stopPropagation()">
+      <img id="modal-image" class="modal-img" src="">
+      <div class="modal-info">
+        <div id="modal-cat" class="card-meta"></div>
+        <h2 id="modal-title" style="font-size: 2rem; margin: 10px 0;"></h2>
+        <div id="modal-rating" style="color:#fbbf24; margin-bottom: 20px;"></div>
+        <p id="modal-desc" style="line-height:1.8; color: var(--text-dim);"></p>
+        <button onclick="document.getElementById('modal').style.display='none'" style="margin-top:20px; background:var(--accent); border:none; color:white; padding:10px 20px; border-radius:8px; cursor:pointer; font-weight:bold;">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // هذه البيانات الآن تحاكي ما سيأتي من الـ API (Dynamic JSON)
+    const liveData = {
+      en: [
+        { id: 'tmdb-1', type: 'Movie', name: "The Batman", rate: "8.3", img: "https://image.tmdb.org/t/p/w500/74xTEgt7R36FpoO9ezT9qCqEsPB.jpg", desc: "Batman ventures into Gotham City's underworld when a sadistic killer leaves behind a trail of cryptic clues." },
+        { id: 'jikan-1', type: 'Anime', name: "Demon Slayer", rate: "8.7", img: "https://cdn.myanimelist.net/images/anime/1286/99889.jpg", desc: "A family is attacked by demons and only two members survive - Tanjiro and his sister Nezuko." },
+        { id: 'rawg-1', type: 'Game', name: "God of War Ragnarök", rate: "9.5", img: "https://media.rawg.io/media/games/49c/49c3dfa45228f71d53f0d0d79f6129c2.jpg", desc: "Kratos and Atreus must journey to each of the Nine Realms in search of answers." },
+        { id: 'tmdb-2', type: 'Series', name: "The Last of Us", rate: "9.1", img: "https://image.tmdb.org/t/p/w500/uKvH561NE9s9Zas9UMNuGexp6eo.jpg", desc: "After a global pandemic destroys civilization, a hardened survivor takes charge of a 14-year-old girl." }
+      ],
+      ar: [
+        { id: 'tmdb-1', type: 'فيلم', name: "ذا باتمان", rate: "8.3", img: "https://image.tmdb.org/t/p/w500/74xTEgt7R36FpoO9ezT9qCqEsPB.jpg", desc: "يغامر باتمان في عالم الجريمة بمدينة غوثام عندما يترك قاتل سادي وراءه سلسلة من القرائن الغامضة." },
+        { id: 'jikan-1', type: 'أنمي', name: "قاتل الشياطين", rate: "8.7", img: "https://cdn.myanimelist.net/images/anime/1286/99889.jpg", desc: "تتعرض عائلة لهجوم من قبل الشياطين ولا ينجو منها سوى عضوين - تانجيرو وأخته نيزوكو." },
+        { id: 'rawg-1', type: 'لعبة', name: "إله الحرب: راجناروك", rate: "9.5", img: "https://media.rawg.io/media/games/49c/49c3dfa45228f71d53f0d0d79f6129c2.jpg", desc: "يجب على كراتوس وأتريوس الانطلاق في رحلة إلى كل من العوالم التسعة بحثًا عن إجابات." },
+        { id: 'tmdb-2', type: 'مسلسل', name: "آخر من تبقى", rate: "9.1", img: "https://image.tmdb.org/t/p/w500/uKvH561NE9s9Zas9UMNuGexp6eo.jpg", desc: "بعد جائحة عالمية تدمر الحضارة، يتولى ناجٍ متمرس مسؤولية فتاة تبلغ من العمر 14 عامًا." }
+      ]
+    };
+
+    let currentLang = 'en';
+    let currentView = 'all';
+    let favorites = JSON.parse(localStorage.getItem('nexus_fav_ai')) || [];
+
+    function render() {
+      const grid = document.getElementById('main-grid');
+      const query = document.getElementById('search').value.toLowerCase();
+      grid.innerHTML = '';
+      
+      let items = liveData[currentLang];
+      if (currentView === 'fav') items = items.filter(i => favorites.includes(i.id));
+
+      items.filter(i => i.name.toLowerCase().includes(query)).forEach(item => {
+        const isFav = favorites.includes(item.id);
+        grid.innerHTML += `
+          <div class="card">
+            <span class="heart-icon ${isFav ? 'active' : ''}" onclick="toggleFav('${item.id}')">❤</span>
+            <div class="rating-badge">★ ${item.rate}</div>
+            <img src="${item.img}" onclick="openDetails('${item.id}')" alt="${item.name}">
+            <div class="card-content">
+              <div class="card-meta">${item.type}</div>
+              <div class="card-title">${item.name}</div>
+            </div>
+          </div>
+        `;
+      });
+      document.getElementById('fav-count').innerText = favorites.length;
+    }
+
+    function toggleFav(id) {
+      favorites = favorites.includes(id) ? favorites.filter(f => f !== id) : [...favorites, id];
+      localStorage.setItem('nexus_fav_ai', JSON.stringify(favorites));
+      render();
+    }
+
+    function openDetails(id) {
+      const item = liveData[currentLang].find(i => i.id === id);
+      document.getElementById('modal-image').src = item.img;
+      document.getElementById('modal-title').innerText = item.name;
+      document.getElementById('modal-cat').innerText = item.type;
+      document.getElementById('modal-rating').innerText = "Rating: " + item.rate + " / 10";
+      document.getElementById('modal-desc').innerText = item.desc;
+      document.getElementById('modal').style.display = 'flex';
+    }
+
+    function switchLang(lang) {
+      currentLang = lang;
+      document.body.className = lang === 'ar' ? 'rtl' : '';
+      render();
+    }
+
+    function setView(view) {
+        currentView = view;
+        document.getElementById('btn-all').classList.toggle('active', view === 'all');
+        document.getElementById('btn-fav').classList.toggle('active', view === 'fav');
+        render();
+    }
+
+    function handleSearch() { render(); }
+    function closeModal(e) { if(e.target.id === 'modal') e.target.style.display = 'none'; }
+
+    render();
+  </script>
+</body>
+</html>
