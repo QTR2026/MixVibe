@@ -1,8 +1,10 @@
 const megaDB = [
-  { n: "The Godfather", t: "فيلم", img: "https://...", link: "https://www.imdb.com/title/tt0068646/" },
-  { n: "Naruto", t: "أنمي", img: "https://...", link: "https://www.imdb.com/title/tt0409591/" },
-  { n: "صدام حسين", t: "شخصية", img: "https://...", link: "https://ar.wikipedia.org/wiki/صدام_حسين" },
-  { n: "Toyota Supra", t: "سيارة", img: "https://...", link: "https://ar.wikipedia.org/wiki/تويوتا_سوبرا" },
-  // ... باقي الـ 2350 عنصر
+  { n: "The Godfather", t: "فيلم", img: "https://...", link: "https://..." },
+  { n: "Naruto", t: "كرتون", img: "https://...", link: "https://..." },
+  { n: "Toyota Supra", t: "سيارة", img: "https://...", link: "https://..." },
+  // باقي العناصر
 ];
-<script src="megaDB.js"></script>
+
+const megaDB = [
+  // هنا تنسخ كل العناصر
+];
