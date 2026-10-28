@@ -483,7 +483,7 @@ footer a{color:var(--accent);text-decoration:none;}
 <button class="log-toggle" onclick="toggleLog()">📋 LOG</button>
 
 <footer>
-  <p>© 2025 <strong>BENSEGHIR TV 4K</strong> · MDI — محتوى 4K مجاني بجودة عالية</p>
+  <p>© <span id="footer-year">2025</span> <strong>BENSEGHIR TV 4K</strong> · MDI — محتوى 4K مجاني بجودة عالية</p>
   <p style="margin-top:5px;"><a href="#">سياسة الخصوصية</a> · <a href="#" onclick="openDonate()">دعم القناة</a></p>
 </footer>
 
@@ -595,7 +595,7 @@ const DB = [
   { id:21, tmdb:37854,  imdb_id:"tt0388629",  title:"ون بيس",         title_en:"One Piece",          cat:"anime", year:1999, rating:8.9, quality:"HD", genres:["مغامرة","أكشن","كوميديا"],  desc:"لوفي وفريقه يبحثون عن أعظم كنز في العالم.", desc_en:"Luffy and his crew journey to find the legendary treasure One Piece.", poster:"https://image.tmdb.org/t/p/w500/e3NBGiAifW9Xt8xD5tpARskjccO.jpg", backdrop:"https://image.tmdb.org/t/p/original/2rmK7mnchw9Xr3XdiTFSxTTLXqv.jpg", duration:"1000+ حلقة", director:"Konosuke Uda", trailerKey:"MCxzPibEIgs" },
   { id:22, tmdb:31911,  imdb_id:"tt1355642",  title:"الكيميائي الفولاذي", title_en:"FMA: Brotherhood", cat:"anime", year:2009, rating:9.1, quality:"HD", genres:["أكشن","مغامرة","فانتازيا"],desc:"أخوان يسعيان لاسترجاع أجسادهما المفقودة باستخدام الكيمياء.", desc_en:"Two brothers search for the Philosopher's Stone after a failed ritual.", poster:"https://image.tmdb.org/t/p/w500/lGFRbqVCMBY3dQSPi0Ztf3bpkKj.jpg", backdrop:"https://image.tmdb.org/t/p/original/gDVbCmmn8vHo1GCNaecPvbwNGS9.jpg", duration:"64 حلقة", director:"Yasuhiro Irie", trailerKey:"--IcmZkvL0Q" },
   // DOCUMENTARY
-  { id:23, tmdb:80274,  imdb_id:"tt8055888",  title:"كوكبنا",         title_en:"Our Planet",         cat:"documentary", year:2019, rating:9.3, quality:"4K", genres:["طبيعة","علوم","عائلي"],  desc:"ديفيد أتنبورو يصحبك في رحلة مذهلة حول كوكب الأرض.", desc_en:"David Attenborough presents Earth's incredible habitats.", poster:"https://image.tmdb.org/t/p/w500/deSvBxqfzeoMG8CXqNBLQaAYo3k.jpg", backdrop:"https://image.tmdb.org/t/p/original/9fpS5GvBCUEGDcFXoCWlQRGNwAd.jpg", duration:"موسم · 8 حلقات", director:"David Attenborough", trailerKey:"aETNYyrqNYE" },
+  { id:23, tmdb:80274,  imdb_id:"tt9253866",  title:"كوكبنا",         title_en:"Our Planet",         cat:"documentary", year:2019, rating:9.3, quality:"4K", genres:["طبيعة","علوم","عائلي"],  desc:"ديفيد أتنبورو يصحبك في رحلة مذهلة حول كوكب الأرض.", desc_en:"David Attenborough presents Earth's incredible habitats.", poster:"https://image.tmdb.org/t/p/w500/deSvBxqfzeoMG8CXqNBLQaAYo3k.jpg", backdrop:"https://image.tmdb.org/t/p/original/9fpS5GvBCUEGDcFXoCWlQRGNwAd.jpg", duration:"موسم · 8 حلقات", director:"David Attenborough", trailerKey:"aETNYyrqNYE" },
   { id:24, tmdb:62286,  imdb_id:"tt5189670",  title:"صنع قاتل",       title_en:"Making a Murderer",  cat:"documentary", year:2015, rating:8.6, quality:"HD", genres:["جريمة حقيقية","قانوني"], desc:"قضية ستيفن أفيري: هل أُدين بريء؟ وثائقي أشعل جدلاً قانونياً.", desc_en:"Steven Avery spent 18 years wrongfully imprisoned, then accused of murder.", poster:"https://image.tmdb.org/t/p/w500/fL4R9fJ2nj3ZkNJA4SNVMR25Tce.jpg", backdrop:"https://image.tmdb.org/t/p/original/tXHpsvFbQLKElMjGBNHqxFIupHm.jpg", duration:"موسمان · 20 حلقة", director:"Laura Ricciardi", trailerKey:"ukKJOTOMJnc" }
 ];
 
@@ -603,13 +603,13 @@ const DB = [
 //  AWARDS DATA (بيانات الجوائز المعروفة)
 // ════════════════════════════════════════════════════════
 const AWARDS_DB = {
-  1:[{title:'أوسكار - أفضل تصوير سينمائي',sub:'96th Academy Awards 2024'},{title:'أوسكار - أفضل مونتاج',sub:'96th Academy Awards 2024'}],
-  2:[{title:'أوسكار - أفضل فيلم',sub:'96th Academy Awards 2024'},{title:'أوسكار - أفضل مخرج',sub:'Christopher Nolan 2024'},{title:'أوسكار - أفضل ممثل',sub:'Cillian Murphy 2024'}],
-  3:[{title:'أوسكار - أفضل فيلم',sub:'AFI Award 2009'}],
-  5:[{title:'أوسكار - أفضل فيلم',sub:'45th Academy Awards 1973'},{title:'أوسكار - أفضل سيناريو',sub:'1973'}],
-  10:[{title:'Emmy - أفضل مسلسل درامي',sub:'Primetime Emmy 2014'}],
-  11:[{title:'Emmy - أفضل مسلسل درامي',sub:'2015'},{title:'Golden Globe',sub:'Best Drama Series 2012'}],
-  14:[{title:'BAFTA - أفضل مسلسل',sub:'2022'},{title:'Directors Guild Award',sub:'2022'}]
+  1:[{title:'أوسكار - أفضل فيلم',sub:'96th Academy Awards 2024'},{title:'أوسكار - أفضل مخرج',sub:'Christopher Nolan · 2024'},{title:'أوسكار - أفضل ممثل',sub:'Cillian Murphy · 2024'},{title:'أوسكار - أفضل تصوير سينمائي',sub:'96th Academy Awards 2024'},{title:'أوسكار - أفضل مونتاج',sub:'96th Academy Awards 2024'}],
+  2:[{title:'أوسكار - أفضل ممثل مساعد',sub:'Heath Ledger · 81st Academy Awards 2009'},{title:'أوسكار - أفضل مونتاج صوتي',sub:'81st Academy Awards 2009'}],
+  3:[{title:'أوسكار - أفضل تصوير سينمائي',sub:'83rd Academy Awards 2011'},{title:'أوسكار - أفضل مؤثرات بصرية',sub:'83rd Academy Awards 2011'},{title:'أوسكار - أفضل مونتاج صوتي',sub:'83rd Academy Awards 2011'},{title:'أوسكار - أفضل مزج صوتي',sub:'83rd Academy Awards 2011'}],
+  5:[{title:'أوسكار - أفضل فيلم',sub:'45th Academy Awards 1973'},{title:'أوسكار - أفضل ممثل',sub:'Marlon Brando · 1973'},{title:'أوسكار - أفضل سيناريو مقتبس',sub:'1973'}],
+  10:[{title:'Emmy - أفضل مسلسل درامي',sub:'Primetime Emmy 2013 & 2014'}],
+  11:[{title:'Emmy - أفضل مسلسل درامي',sub:'Primetime Emmy 2015'},{title:'Golden Globe - أفضل ممثل مساعد',sub:'Peter Dinklage · 2012'}],
+  14:[{title:'Emmy - أفضل إخراج لمسلسل درامي',sub:'Hwang Dong-hyuk · 2022'},{title:'Emmy - أفضل ممثل رئيسي في مسلسل درامي',sub:'Lee Jung-jae · 2022'}]
 };
 
 // ════════════════════════════════════════════════════════
@@ -631,13 +631,15 @@ let currentModalId = null;
 const CACHE = {};
 const CACHE_TTL = 30 * 60 * 1000; // 30 دقيقة
 
+const cacheKey = id => `${id}_${lang}`;   // FIX: الكاش يعتمد على اللغة
 function getCached(id) {
-  const c = CACHE[id];
+  const k = cacheKey(id);
+  const c = CACHE[k];
   if (!c) return null;
-  if (Date.now() - c.ts > CACHE_TTL) { delete CACHE[id]; return null; }
+  if (Date.now() - c.ts > CACHE_TTL) { delete CACHE[k]; return null; }
   return c.data;
 }
-function setCache(id, data) { CACHE[id] = { data, ts: Date.now() }; }
+function setCache(id, data) { CACHE[cacheKey(id)] = { data, ts: Date.now() }; }
 
 // ════════════════════════════════════════════════════════
 //  i18n
@@ -660,9 +662,12 @@ function showToast(msg, dur=2800) {
   _toastTimer = setTimeout(() => el.classList.remove('show'), dur);
 }
 function copyBinance() {
-  const addr = 'TReplaceWithYourBinanceAddress';
-  navigator.clipboard.writeText(addr).catch(()=>{});
-  showToast(t('copyDone'));
+  const addr = 'TReplaceWithYourBinanceAddress';   // ← ضع عنوان محفظتك هنا
+  if (addr.includes('ReplaceWith')) { showToast('⚠️ لم يتم إدخال عنوان Binance بعد'); return; }
+  const done = () => showToast(t('copyDone'));
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(addr).then(done).catch(() => showToast('⚠️ تعذّر النسخ'));
+  } else { showToast('⚠️ تعذّر النسخ'); }
 }
 function getStars(r) {
   const f = Math.min(5, Math.round(parseFloat(r||0)/2));
@@ -673,9 +678,17 @@ function safeStr(v, fallback) {
   if (v && typeof v === 'number' && !isNaN(v)) return String(v);
   return fallback || t('na');
 }
+function esc(s) {
+  return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+// صورة بديلة محلية (SVG) بدل خدمة الصور الخارجية المتوقفة
+function ph(w, h, text) {
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}"><rect width="100%" height="100%" fill="#0d1117"/><text x="50%" y="50%" fill="#64748b" font-family="sans-serif" font-size="${Math.max(12, Math.round(w/8))}" text-anchor="middle" dominant-baseline="middle">${esc(text||'TV')}</text></svg>`;
+  return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+}
 function safePoster(url, title) {
   if (url && url.startsWith('http')) return url;
-  return `https://via.placeholder.com/300x450/0d1117/64748b?text=${encodeURIComponent(title||'TV')}`;
+  return ph(300, 450, title || 'TV');
 }
 
 // ════════════════════════════════════════════════════════
@@ -739,7 +752,7 @@ function renderTrailer(trailerResult, item) {
           src="${YT_EMBED}${trailerResult.key}?rel=0&modestbranding=1&playsinline=1"
           allowfullscreen
           allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          title="${item.title} - Trailer"
+          title="${esc(item.title)} - Trailer"
           loading="lazy">
         </iframe>
       </div>`;
@@ -804,7 +817,7 @@ async function enrichItem(item) {
     // Country
     const countries = details.production_countries || [];
     const originCC  = details.origin_country || [];
-    const countryList = countries.map(c=>c.name).concat(originCC).filter(Boolean);
+    const countryList = (countries.length ? countries.map(c=>c.name) : originCC).filter(Boolean);
     enriched.country_live = countryList.slice(0,2).join('، ') || t('na');
 
     // Language
@@ -861,29 +874,31 @@ async function enrichItem(item) {
 
   } catch (e1) {
     LOG.err(`TMDb failed for "${item.title}": ${e1.message}`, 'TMDB');
+    let fallbackOK = false;
 
     // ── المرحلة الثانية: IMDb (open endpoint) ────────────
-    let imdbOK = false;
     try {
+      if (!item.imdb_id) throw new Error('no imdb_id');
       LOG.warn(`Trying IMDb fallback for ${item.imdb_id}`, 'IMDB');
-      const char = item.imdb_id ? item.imdb_id[2].toLowerCase() : 't';
+      const char = item.imdb_id[0].toLowerCase();   // FIX: كان [2] (رقم) بدل الحرف الأول
       const imdbRes = await fetch(`https://v2.sg.media-imdb.com/suggests/${char}/${item.imdb_id}.json`, { signal: AbortSignal.timeout(5000) });
       const txt = await imdbRes.text();
       const json = JSON.parse(txt.slice(txt.indexOf('(') + 1, txt.lastIndexOf(')')));
       if (json && json.d && json.d[0]) {
         const d = json.d[0];
         if (d.i && d.i.imageUrl) enriched.poster_live = d.i.imageUrl;
-        if (d.y) enriched.year = d.y;
+        if (d.y) enriched.release_date = String(d.y);
         LOG.ok('IMDb fallback: partial image data retrieved', 'IMDB');
-        imdbOK = true;
         enriched._source = 'imdb';
         enriched._sourcePriority = 2;
+        fallbackOK = true;
       }
     } catch (e2) {
       LOG.err(`IMDb fallback failed: ${e2.message}`, 'IMDB');
+    }
 
-      // ── المرحلة الثالثة: Wikipedia ───────────────────────
-      let wikiOK = false;
+    // ── المرحلة الثالثة: Wikipedia (FIX: تُجرَّب أيضاً إذا لم يُرجع IMDb بيانات) ──
+    if (!fallbackOK) {
       try {
         LOG.warn(`Trying Wikipedia fallback for "${item.title_en}"`, 'WIKI');
         const wRes = await fetch(
@@ -896,19 +911,22 @@ async function enrichItem(item) {
           enriched.desc_wiki = wData.extract.slice(0, 500);
           if (wData.thumbnail && wData.thumbnail.source) enriched.poster_wiki = wData.thumbnail.source;
           LOG.ok('Wikipedia fallback: description retrieved', 'WIKI');
-          wikiOK = true;
           enriched._source = 'wiki';
           enriched._sourcePriority = 3;
+          fallbackOK = true;
         }
       } catch (e3) {
         LOG.err(`Wikipedia fallback failed: ${e3.message}`, 'WIKI');
-        // ── المرحلة الرابعة: بيانات محلية مضمونة ──────────
-        LOG.warn(`All external sources failed. Using local DB for "${item.title}"`, 'FALLBACK');
-        enriched._source = 'local';
-        enriched._sourcePriority = 4;
-        enriched.trailer_result = await resolveTrailer(item, null);
-        LOG.critical && LOG.critical(`All sources failed for id=${item.id}`, 'FALLBACK');
       }
+    }
+
+    // ── المرحلة الرابعة: بيانات محلية مضمونة ──────────
+    if (!fallbackOK) {
+      LOG.warn(`All external sources failed. Using local DB for "${item.title}"`, 'FALLBACK');
+      enriched._source = 'local';
+      enriched._sourcePriority = 4;
+      enriched.trailer_result = await resolveTrailer(item, null);
+      LOG.critical(`All sources failed for id=${item.id}`, 'FALLBACK');
     }
   }
 
@@ -973,7 +991,7 @@ async function openDetail(id) {
 
   // FIX: إظهار بيانات فورية أولاً ثم الاسترجاع
   renderDetailBasic(item);
-  showModalLoading(true);
+  showModalLoading(true, t('loadingData'));
 
   let enriched;
   try {
@@ -984,6 +1002,8 @@ async function openDetail(id) {
     showToast('⚠️ بعض البيانات تعذّر جلبها — يُعرض المحتوى المتوفر');
   }
 
+  // FIX: إذا أُغلقت النافذة أو فُتح عنصر آخر أثناء الجلب، لا نعرض بيانات قديمة
+  if (currentModalId !== id) return;
   showModalLoading(false);
   renderDetailFull(enriched, item);
 }
@@ -1037,7 +1057,7 @@ function renderDetailFull(e, original) {
   }
 
   // Description — أفضل نص متوفر
-  const desc = (lang === 'ar' ? '' : e.desc_live) || e.desc_live || e.desc_wiki || (lang === 'ar' ? original.desc : original.desc_en) || t('na');
+  const desc = e.desc_live || (lang === 'ar' ? original.desc : original.desc_en) || e.desc_wiki || t('na');
   document.getElementById('m-desc').textContent = desc;
 
   // Genres
@@ -1080,12 +1100,12 @@ function renderDetailFull(e, original) {
     document.getElementById('cast-section').style.display = 'block';
     document.getElementById('cast-list').innerHTML = castData.map(a => `
       <div class="cast-card">
-        <img src="${a.photo || 'https://via.placeholder.com/68x68/161b27/64748b?text=👤'}"
-             alt="${a.name}"
-             onerror="this.src='https://via.placeholder.com/68x68/161b27/64748b?text=👤'"
+        <img src="${a.photo || ph(68,68,'?')}"
+             alt="${esc(a.name)}"
+             onerror="this.onerror=null;this.src=ph(68,68,'?')"
              loading="lazy">
-        <div class="cast-name">${a.name}</div>
-        <div class="cast-role">${a.character || ''}</div>
+        <div class="cast-name">${esc(a.name)}</div>
+        <div class="cast-role">${esc(a.character || '')}</div>
       </div>`).join('');
   }
 
@@ -1095,8 +1115,8 @@ function renderDetailFull(e, original) {
     document.getElementById('awards-section').style.display = 'block';
     document.getElementById('awards-list').innerHTML = awards.map(a => `
       <div class="award-item">
-        <div class="aw-title">🏆 ${a.title}</div>
-        <div class="aw-sub">${a.sub}</div>
+        <div class="aw-title">🏆 ${esc(a.title)}</div>
+        <div class="aw-sub">${esc(a.sub)}</div>
       </div>`).join('');
   }
 
@@ -1105,11 +1125,11 @@ function renderDetailFull(e, original) {
   if (similar.length) {
     document.getElementById('similar-section').style.display = 'block';
     document.getElementById('similar-list').innerHTML = similar.map(s => `
-      <div class="sim-card" onclick="openSimilarByTMDB(${s.tmdb}, '${(s.title||'').replace(/'/g,"\\'")}')">
-        <img src="${s.poster}" alt="${s.title}"
-             onerror="this.src='https://via.placeholder.com/115x172/161b27/64748b?text=?'"
+      <div class="sim-card" data-title="${esc(s.title)}" onclick="openSimilarByTMDB(${s.tmdb}, this.dataset.title)">
+        <img src="${s.poster}" alt="${esc(s.title)}"
+             onerror="this.onerror=null;this.src=ph(115,172,'?')"
              loading="lazy">
-        <div class="sim-card-title">${s.title}</div>
+        <div class="sim-card-title">${esc(s.title)}</div>
       </div>`).join('');
   }
 
@@ -1130,7 +1150,7 @@ function renderDetailFull(e, original) {
 
 function renderBadges(item, genres) {
   const catMap = { movie:'🎬 أفلام', series:'📺 مسلسل', anime:'⛩ أنمي', documentary:'🎥 وثائقي' };
-  const genreTags = (genres||[]).map(g => `<span class="modal-badge genre-tag">${g}</span>`).join('');
+  const genreTags = (genres||[]).map(g => `<span class="modal-badge genre-tag">${esc(g)}</span>`).join('');
   document.getElementById('m-badges').innerHTML = `
     <span class="modal-badge cat">${catMap[item.cat]||item.cat}</span>
     <span class="modal-badge year">${item.year}</span>
@@ -1152,7 +1172,7 @@ function renderInfoGrid(info) {
   document.getElementById('m-info-grid').innerHTML = fields.map(f => `
     <div class="modal-info-item">
       <div class="modal-info-label">${f.label}</div>
-      <div class="modal-info-val">${f.val}</div>
+      <div class="modal-info-val">${esc(f.val)}</div>
     </div>`).join('');
 }
 
@@ -1172,6 +1192,7 @@ function closeDetail() {
   document.getElementById('modal-overlay').classList.remove('open');
   document.body.style.overflow = '';
   currentModalId = null;
+  showModalLoading(false);   // FIX: إخفاء طبقة التحميل عند الإغلاق أثناء الجلب
 }
 function handleOverlayClick(e) {
   if (e.target === document.getElementById('modal-overlay')) closeDetail();
@@ -1254,7 +1275,8 @@ function getFilteredData() {
     x.title.toLowerCase().includes(q) ||
     x.title_en.toLowerCase().includes(q) ||
     x.genres.some(g => g.toLowerCase().includes(q)) ||
-    x.desc.includes(q)
+    x.desc.toLowerCase().includes(q) ||
+    x.desc_en.toLowerCase().includes(q)
   );
   if (sortMode === 'rating') data.sort((a,b) => b.rating - a.rating);
   else if (sortMode === 'year')  data.sort((a,b) => b.year - a.year);
@@ -1300,7 +1322,7 @@ function renderGrid(data) {
     if (viewMode === 'list') return `
       <div class="list-card" onclick="openDetail(${item.id})">
         <img src="${poster}" alt="${item.title}" loading="lazy"
-             onerror="this.src='https://via.placeholder.com/85x127/0d1117/64748b?text=TV'">
+             onerror="this.onerror=null;this.src=ph(85,127,'?')">
         <div class="list-card-body">
           <div class="list-card-title">${item.title}</div>
           <div class="list-card-desc">${lang==='ar' ? item.desc : item.desc_en}</div>
@@ -1322,7 +1344,7 @@ function renderGrid(data) {
       <div class="card" onclick="openDetail(${item.id})">
         <div style="position:relative;overflow:hidden;">
           <img class="card-img" src="${poster}" alt="${item.title}" loading="lazy"
-               onerror="this.src='https://via.placeholder.com/300x450/0d1117/64748b?text=TV'">
+               onerror="this.onerror=null;this.src=ph(300,450,'?')">
           <div class="card-badges">${qualBadge}</div>
           <button class="card-fav ${isFav?'active':''}"
                   onclick="event.stopPropagation();toggleFav(${item.id})">
@@ -1355,10 +1377,10 @@ function makeHCard(item) {
     <div class="h-card" onclick="openDetail(${item.id})">
       <div style="position:relative;overflow:hidden;">
         <img src="${poster}" alt="${item.title}" loading="lazy"
-             onerror="this.src='https://via.placeholder.com/152x228/0d1117/64748b?text=TV'">
+             onerror="this.onerror=null;this.src=ph(152,228,'?')">
         <div class="h-card-badge-wrap">${qualBadge}</div>
         <button class="h-card-fav ${isFav?'active':''}"
-                onclick="event.stopPropagation();toggleFav(${item.id});renderSections();">
+                onclick="event.stopPropagation();toggleFav(${item.id});">
           ${isFav?'❤️':'♡'}
         </button>
         <div class="h-card-play-overlay"><div class="h-play-circle">▶</div></div>
@@ -1433,6 +1455,7 @@ function switchLang(l) {
   document.documentElement.lang = l;
   document.documentElement.dir  = l === 'ar' ? 'rtl' : 'ltr';
   document.body.style.direction  = l === 'ar' ? 'rtl' : 'ltr';
+  document.getElementById('section-label').textContent = currentView === 'all' ? t('sectionAll') : t('sectionFav');
   setupHero();
   buildGenreList();
   renderSections();
@@ -1475,6 +1498,7 @@ LOG.onError(entry => {
 // ════════════════════════════════════════════════════════
 //  INIT
 // ════════════════════════════════════════════════════════
+document.getElementById('footer-year').textContent = new Date().getFullYear();
 buildGenreList();
 setupHero();
 updateFavCount();
